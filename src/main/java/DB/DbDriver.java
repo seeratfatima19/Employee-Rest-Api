@@ -5,12 +5,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.*;
-import Employee.EmpDAO;
-import com.zaxxer.hikari.HikariDataSource;
-
-import javax.sql.DataSource;
 
 public class DbDriver {
 
@@ -23,18 +17,26 @@ public class DbDriver {
             ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
+                System.out.println("=====================================");
                 System.out.println("ID: "+ rs.getInt("id"));
                 System.out.println("Emp Name: "+ rs.getString("name"));
                 System.out.println("Emp Age: "+ rs.getInt("age"));
                 System.out.println("City: "+ rs.getString("city"));
                 System.out.println("Emp Department: "+ rs.getString("dept"));
-                System.out.println("Emp Position: "+ rs.getInt("position"));
+                System.out.println("Emp Position: "+ rs.getString("position"));
+                System.out.println("=====================================");
 
             }
         }
         catch(Exception e){
             System.out.println("in driver "+ e);
         }
+
+    }
+
+    public static void addEmployee(Employee employee)
+    {
+
     }
 
 }
