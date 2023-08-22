@@ -36,7 +36,15 @@ public class DbDriver {
 
     public static void addEmployee(Employee employee)
     {
+        String query = "insert into employee.emp_data values("+employee.getId()+",'"+employee.getName()+"',"+employee.getAge()+",'"+employee.getCity()+"','"+employee.getDepartment()+"','"+employee.getPosition()+"')";
+        try(Connection conn = ConnPool.getDataSource().getConnection();
+            Statement stmt = conn.createStatement()) {
 
+            stmt.executeUpdate(query);
+        }
+        catch(Exception e){
+            System.out.println("in driver "+ e);
+        }
     }
 
 }
