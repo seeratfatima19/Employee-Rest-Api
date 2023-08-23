@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbDriver {
 
-    public static void getAllEmployees() throws IOException {
+    public static List<Employee> getAllEmployees() throws IOException {
 
+        List<Employee> employees = new ArrayList<Employee>();
         String query = "select * from employee.emp_data";
 
         try(Connection conn = ConnPool.getDataSource().getConnection();
@@ -26,12 +29,15 @@ public class DbDriver {
                 System.out.println("Emp Position: "+ rs.getString("position"));
                 System.out.println("=====================================");
 
+                employees.add(new Employee(rs.getString("name"), rs.getInt("age"), rs.getString("city"), rs.getString("id"),  rs.getString("dept"), rs.getString("position")));
             }
+
+            return employees;
         }
         catch(Exception e){
             System.out.println("in driver "+ e);
         }
-
+        return null;
     }
 
     public static void addEmployee(Employee employee)
